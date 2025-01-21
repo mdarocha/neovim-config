@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, config, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
 
 let
   cfg = config.mdarocha.neovim-config;
@@ -70,11 +76,10 @@ let
   ];
 
   # Debugger packages, required for DAP functionality
-  dapPackages = with pkgs;
-    [
-      # csharp
-      netcoredbg
-    ];
+  dapPackages = with pkgs; [
+    # csharp
+    netcoredbg
+  ];
 in
 {
   programs.neovim = lib.mkIf cfg.enableNeovim {
@@ -88,7 +93,8 @@ in
 
     extraConfig = (builtins.readFile ./configs/init.vim);
 
-    plugins = with pkgs.vimPlugins;
+    plugins =
+      with pkgs.vimPlugins;
       [
         nvim-web-devicons
         vim-sensible
@@ -114,22 +120,22 @@ in
         }
         omnisharp-extended-lsp-nvim
         {
-            plugin = NeoSolarized-nvim;
-            config = ''
-              lua <<EOF
-                require('NeoSolarized').setup {
-                  style = 'dark',
-                  transparent = false,
-                  terminal_colors = true,
-                  styles = {
-                    string = { italic = false },
-                    keywords = { italic = false },
-                  }
+          plugin = NeoSolarized-nvim;
+          config = ''
+            lua <<EOF
+              require('NeoSolarized').setup {
+                style = 'dark',
+                transparent = false,
+                terminal_colors = true,
+                styles = {
+                  string = { italic = false },
+                  keywords = { italic = false },
                 }
-              EOF
-              set termguicolors
-              colorscheme NeoSolarized
-            '';
+              }
+            EOF
+            set termguicolors
+            colorscheme NeoSolarized
+          '';
         }
         {
           plugin = editorconfig-vim;
@@ -184,11 +190,15 @@ in
             EOF
           '';
         }
-      ] ++ lib.lists.flatten (map (p: import p { inherit pkgs inputs; }) pluginImports);
-    extraPackages = with pkgs;
+      ]
+      ++ lib.lists.flatten (map (p: import p { inherit pkgs inputs; }) pluginImports);
+    extraPackages =
+      with pkgs;
       [
         # Required by telescope
         ripgrep
-      ] ++ lspPackages ++ dapPackages;
+      ]
+      ++ lspPackages
+      ++ dapPackages;
   };
 }

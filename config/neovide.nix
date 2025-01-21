@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   cfg = config.mdarocha.neovim-config;
@@ -9,7 +14,7 @@ in
   config = lib.mkIf cfg.enableNeovide {
     programs.neovide = {
       enable = true;
-      settings = {};
+      settings = { };
     };
 
     # ensure clipboard work and the needed fonts are installed
@@ -24,10 +29,15 @@ in
       neovide = {
         name = "Neovide";
         icon = "neovide";
-        exec = if cfg.useNixGl
-          then "${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide %F"
-          else "${config.home.homeDirectory}/.nix-profile/bin/neovide %F";
-        categories = [ "Utility" "TextEditor" ];
+        exec =
+          if cfg.useNixGl then
+            "${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide %F"
+          else
+            "${config.home.homeDirectory}/.nix-profile/bin/neovide %F";
+        categories = [
+          "Utility"
+          "TextEditor"
+        ];
         mimeType = [
           "text/english"
           "text/plain"
