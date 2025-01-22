@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.mdarocha.neovim-config;
+  cfg = config.mdarocha;
 in
 # TODO this assert makes an infinite recursion error
 # assert lib.assertMsg (cfg.enableNeovim && cfg.enableNeovide) "neovim needs to be enabled to use neovide";
 {
-  config = lib.mkIf cfg.enableNeovide {
+  config = lib.mkIf cfg.neovide.enable {
     programs.neovide = {
       enable = true;
       settings = { };
@@ -30,7 +30,7 @@ in
         name = "Neovide";
         icon = "neovide";
         exec =
-          if cfg.useNixGl then
+          if cfg.neovide.useNixGl then
             "${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide %F"
           else
             "${config.home.homeDirectory}/.nix-profile/bin/neovide %F";

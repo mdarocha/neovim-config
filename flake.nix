@@ -59,6 +59,14 @@
                   homeDirectory = "/tmp/neovim-config-test";
                   stateVersion = "25.05";
                 };
+
+                mdarocha = {
+                  neovim.enable = true;
+                  neovide = {
+                    enable = true;
+                    useNixGl = true;
+                  };
+                };
               }
             ];
           };

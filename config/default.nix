@@ -2,8 +2,8 @@ inputs:
 { lib, ... }:
 
 let
-  inherit (lib) mkOption;
-  inherit (lib.types) bool;
+  inherit (lib) mkOption mkEnableOption;
+  inherit (lib.types) submodule;
 in
 {
   imports = [
@@ -11,21 +11,24 @@ in
     ./neovide.nix
   ];
 
-  options.mdarocha.neovim-config = {
-    enableNeovim = mkOption {
-      type = bool;
-      default = true;
-      description = "Whether to enable Neovim with the custom config";
+  options.mdarocha = {
+    neovim = mkOption {
+      description = "Configuration for the customized Neovim";
+      type = submodule {
+        options = {
+          enable = mkEnableOption "custom neovim";
+        };
+      };
     };
-    enableNeovide = mkOption {
-      type = bool;
-      default = true;
-      description = "Whether to enable Neovide";
-    };
-    useNixGl = mkOption {
-      type = bool;
-      default = true;
-      description = "Whether to use nixGL to run Neovide";
+
+    neovide = mkOption {
+      description = "Configuration for Neovide";
+      type = submodule {
+        options = {
+          enable = mkEnableOption "neovide";
+          useNixGl = mkEnableOption "nixGL";
+        };
+      };
     };
   };
 

@@ -7,7 +7,7 @@
 }:
 
 let
-  cfg = config.mdarocha.neovim-config;
+  cfg = config.mdarocha.neovim;
 
   inherit (pkgs.vimUtils) buildVimPlugin;
 
@@ -82,7 +82,7 @@ let
   ];
 in
 {
-  programs.neovim = lib.mkIf cfg.enableNeovim {
+  programs.neovim = lib.mkIf cfg.enable {
     enable = true;
 
     viAlias = true;
