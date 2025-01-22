@@ -91,7 +91,15 @@
         };
 
       homeManagerModules = {
-        default = import ./config inputs;
+        default = import ./config {
+          inherit (inputs)
+            numbers-vim
+            vim-renamer
+            vim-password-store
+            vim-gtfo
+            neosolarized-nvim
+            ;
+        };
       };
     };
 }

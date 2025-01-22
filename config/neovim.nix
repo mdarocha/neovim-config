@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  inputs,
+  vimPluginSrcs,
   config,
   ...
 }:
@@ -13,24 +13,24 @@ let
 
   numbers-vim = buildVimPlugin {
     name = "numbers.vim";
-    src = inputs.numbers-vim;
+    src = vimPluginSrcs.numbers-vim;
   };
   vim-renamer = buildVimPlugin {
     name = "renamer.vim";
-    src = inputs.vim-renamer;
+    src = vimPluginSrcs.vim-renamer;
   };
   vim-password-store = buildVimPlugin {
     name = "vim-password-store";
-    src = inputs.vim-password-store;
+    src = vimPluginSrcs.vim-password-store;
   };
   vim-gtfo = buildVimPlugin {
     name = "vim-gtfo";
-    src = inputs.vim-gtfo;
+    src = vimPluginSrcs.vim-gtfo;
   };
 
   NeoSolarized-nvim = buildVimPlugin {
     name = "NeoSolarized-nvim";
-    src = inputs.neosolarized-nvim;
+    src = vimPluginSrcs.neosolarized-nvim;
   };
 
   pluginImports = [

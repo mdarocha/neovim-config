@@ -1,4 +1,4 @@
-inputs:
+vimPluginSrcs:
 { lib, ... }:
 
 let
@@ -33,6 +33,6 @@ in
   };
 
   config = {
-    _module.args = { inherit inputs; };
+    _module.args = { inherit vimPluginSrcs; };
   };
 }
