@@ -84,6 +84,7 @@ in
 {
   programs.neovim = lib.mkIf cfg.enable {
     enable = true;
+    defaultEditor = true;
 
     viAlias = true;
     vimAlias = true;
