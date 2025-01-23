@@ -192,7 +192,7 @@ in
           '';
         }
       ]
-      ++ lib.lists.flatten (map (p: import p { inherit pkgs inputs; }) pluginImports);
+      ++ lib.optionals (!cfg.disableLsp) (lib.lists.flatten (map (p: import p { inherit pkgs inputs; }) pluginImports));
     extraPackages =
       with pkgs;
       [

@@ -3,7 +3,7 @@ vimPluginSrcs:
 
 let
   inherit (lib) mkOption mkEnableOption;
-  inherit (lib.types) submodule;
+  inherit (lib.types) submodule bool;
 in
 {
   imports = [
@@ -17,6 +17,12 @@ in
       type = submodule {
         options = {
           enable = mkEnableOption "custom neovim";
+
+          disableLsp = mkOption {
+            description = "If true, skips installation of LSP servers, reducing closure size";
+            type = bool;
+            default = false;
+          };
         };
       };
     };
