@@ -9,7 +9,7 @@ let
   cfg = config.mdarocha;
 
   package = if cfg.neovide.useNixGl then pkgs.writeScriptBin "neovide" ''
-    ${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide "$@"
+    ${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${pkgs.neovide}/bin/neovide "$@"
   '' else pkgs.neovide;
 in
 # TODO this assert makes an infinite recursion error
