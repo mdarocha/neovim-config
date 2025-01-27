@@ -55,8 +55,8 @@
               self.homeManagerModules.default
               {
                 home = {
-                  username = "test";
-                  homeDirectory = "/tmp/neovim-config-test";
+                  username = "marek";
+                  homeDirectory = "/home/marek";
                   stateVersion = "25.05";
                 };
 

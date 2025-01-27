@@ -7,6 +7,10 @@
 
 let
   cfg = config.mdarocha;
+
+  package = if cfg.neovide.useNixGl then pkgs.writeScriptBin "neovide" ''
+    ${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide "$@"
+  '' else pkgs.neovide;
 in
 # TODO this assert makes an infinite recursion error
 # assert lib.assertMsg (cfg.enableNeovim && cfg.enableNeovide) "neovim needs to be enabled to use neovide";
@@ -14,6 +18,7 @@ in
   config = lib.mkIf cfg.neovide.enable {
     programs.neovide = {
       enable = true;
+      inherit package;
       settings = { };
     };
 
@@ -22,13 +27,14 @@ in
     home.packages = with pkgs; [
       wl-clipboard
       nerd-fonts.hack
+      noto-fonts-color-emoji
     ];
 
     xdg.desktopEntries = {
       # ensure neovide executes correctly
       neovide = {
         name = "Neovide";
-        icon = "neovide";
+        icon = "${pkgs.neovide}/share/icons/hicolor/scalable/apps/neovide.svg";
         exec =
           if cfg.neovide.useNixGl then
             "${config.home.homeDirectory}/.nix-profile/bin/nixGLIntel ${config.home.homeDirectory}/.nix-profile/bin/neovide %F"
