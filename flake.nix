@@ -62,10 +62,6 @@
 
                 mdarocha = {
                   neovim.enable = true;
-                  neovide = {
-                    enable = true;
-                    useNixGl = true;
-                  };
                 };
               }
             ];
@@ -76,18 +72,12 @@
               testConfig.config.xdg.configFile."nvim/init.lua".text;
           neovimPkg = testConfig.config.programs.neovim.finalPackage;
 
-          neovidePkgs = testConfig.config.programs.neovide.package;
-
           neovim = pkgs.writeShellScriptBin "neovim" ''
             ${neovimPkg}/bin/nvim -u ${neovimConfig} "$@"
           '';
-
-          neovide = pkgs.writeShellScriptBin "neovide" ''
-            ${neovidePkgs}/bin/neovide --neovim-bin ${neovim}/bin/neovim "$@"
-          '';
         in
         {
-          inherit neovim neovide;
+          inherit neovim;
         };
 
       homeManagerModules = {

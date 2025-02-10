@@ -1,14 +1,15 @@
 vimPluginSrcs:
-{ lib, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib) mkOption mkEnableOption;
   inherit (lib.types) submodule bool;
+
+  cfg = config.mdarocha;
 in
 {
   imports = [
     ./neovim.nix
-    ./neovide.nix
   ];
 
   options.mdarocha = {
@@ -23,16 +24,12 @@ in
             type = bool;
             default = false;
           };
-        };
-      };
-    };
 
-    neovide = mkOption {
-      description = "Configuration for Neovide";
-      type = submodule {
-        options = {
-          enable = mkEnableOption "neovide";
-          useNixGl = mkEnableOption "nixGL";
+          hideDesktopFile = mkOption {
+            description = "If true, hides the desktop file for Neovim";
+            type = bool;
+            default = true;
+          };
         };
       };
     };
@@ -40,5 +37,12 @@ in
 
   config = {
     _module.args = { inherit vimPluginSrcs; };
+
+    xdg.desktopEntries = lib.mkIf cfg.neovim.hideDesktopFile {
+      nvim = {
+        name = "Neovim";
+        noDisplay = true;
+      };
+    };
   };
 }
