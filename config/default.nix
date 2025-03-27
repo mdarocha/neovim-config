@@ -19,12 +19,6 @@ in
         options = {
           enable = mkEnableOption "custom neovim";
 
-          disableLsp = mkOption {
-            description = "If true, skips installation of LSP servers, reducing closure size";
-            type = bool;
-            default = false;
-          };
-
           hideDesktopFile = mkOption {
             description = "If true, hides the desktop file for Neovim";
             type = bool;

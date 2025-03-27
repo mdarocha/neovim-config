@@ -20,16 +20,6 @@
       flake = false;
     };
 
-    vim-password-store = {
-      url = "github:fourjay/vim-password-store/master";
-      flake = false;
-    };
-
-    vim-gtfo = {
-      url = "github:justinmk/vim-gtfo";
-      flake = false;
-    };
-
     neosolarized-nvim = {
       url = "github:Tsuzat/NeoSolarized.nvim";
       flake = false;

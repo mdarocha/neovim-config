@@ -76,42 +76,7 @@
         "neosolarized-nvim": "neosolarized-nvim",
         "nixpkgs": "nixpkgs",
         "numbers-vim": "numbers-vim",
-        "vim-gtfo": "vim-gtfo",
-        "vim-password-store": "vim-password-store",
         "vim-renamer": "vim-renamer"
-      }
-    },
-    "vim-gtfo": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718656676,
-        "narHash": "sha256-T3cMfqjFHMLPFu1sa4sOZ4KGCMx84s0C746evSu9tJg=",
-        "owner": "justinmk",
-        "repo": "vim-gtfo",
-        "rev": "21a5e0292dabccba7363a6e508029d078a74504b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "justinmk",
-        "repo": "vim-gtfo",
-        "type": "github"
-      }
-    },
-    "vim-password-store": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1554598191,
-        "narHash": "sha256-MwH3uZI0lGlQTDArUKAwOXs21o7Ql7+2igwZeJZp+n0=",
-        "owner": "fourjay",
-        "repo": "vim-password-store",
-        "rev": "474a7dfc1c49986ed92fa78925963080b673926a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fourjay",
-        "ref": "master",
-        "repo": "vim-password-store",
-        "type": "github"
       }
     },
     "vim-renamer": {
