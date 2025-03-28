@@ -1,5 +1,5 @@
 require("blink.cmp").setup {
-  keymap = { preset = "super-tab" },
+  keymap = { preset = "default" },
   signature = {
     enabled = true,
     window = {
