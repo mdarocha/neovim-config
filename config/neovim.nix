@@ -73,6 +73,8 @@ in
       # Used by mason to install some lsps
       pkgs.gcc
       pkgs.cargo
+      # Used by copilot
+      pkgs.copilot-language-server
     ];
   };
 }

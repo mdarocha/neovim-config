@@ -100,7 +100,13 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   command = "set filetype=fsharp"
 })
 
--- Neovide setup
+-- fix htmldjango files to properly work with lsp
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = "htmldjango",
+  command = "set ft=html"
+})
+
+-- neovide setup
 if vim.g.neovide then
   vim.opt.guifont = "Hack_Nerd_Font,Noto_Color_Emoji:h12"
 end

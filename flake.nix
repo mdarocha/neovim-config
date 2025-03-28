@@ -38,7 +38,10 @@
 
       packages.x86_64-linux =
         let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
           testConfig = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [

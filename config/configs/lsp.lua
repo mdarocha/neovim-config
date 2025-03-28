@@ -36,6 +36,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- copilot
 require("copilot").setup({
+  lsp_binary = "copilot-language-server",
   suggestion = { enabled = false },
   panel = { enabled = false, },
   filetypes = {
