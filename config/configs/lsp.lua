@@ -45,95 +45,71 @@ require("copilot").setup({
   },
 })
 
--- mason
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
+-- lazy.nvim
+require("lazy-lsp").setup {
+  prefer_local = false,
+  default_config = {
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
+    on_attach = function(client)
+      -- disable lsp highlighting, since we use treesitter
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  },
+  -- https://github.com/dundalek/lazy-lsp.nvim/blob/master/servers.md#curated-servers
+  excluded_servers = {
+    "ccls",                            -- prefer clangd
+    "denols",                          -- prefer eslint and ts_ls
+    "docker_compose_language_service", -- yamlls should be enough?
+    "flow",                            -- prefer eslint and ts_ls
+    "ltex",                            -- grammar tool using too much CPU
+    "quick_lint_js",                   -- prefer eslint and ts_ls
+    "scry",                            -- archived on Jun 1, 2023
+    "biome",                           -- not mature enough to be default
+    "oxlint",                          -- prefer eslint
+  },
+  preferred_servers = {
+    markdown = {},
+    python = { "pylsp", "ruff" },
+    nix = { "nil_ls" },
+  },
+  -- overrides for some servers
+  config = {
+    omnisharp = {
+      cmd = {
+        "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()),
+        "FormattingOptions:EnableEditorConfigSupport=true",
+        "RoslynExtensionsOptions:enableDecompilationSupport=true"
+      },
+      handlers = {
+        ["textDocument/definition"] = require('omnisharp_extended').handler,
+      }
+    },
+    yamlls = {
+      settings = {
+        yaml = {
+          schemas = require('schemastore').json.schemas(),
+        },
+      }
+    },
+    jsonls = {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+        },
+      }
+    },
+    lua_ls = {
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" }
+          }
+        }
+      }
+    },
+    tailwindcss = {
+      root_dir = require("lspconfig.util").root_pattern(".git"),
+      autostart = false
     }
   }
-})
-
-require("mason-lspconfig").setup()
-
--- auto-setup installed lsp servers
-require("mason-lspconfig").setup_handlers {
-    -- default handler - just the default setup
-    function (server_name)
-        local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-        require("lspconfig")[server_name].setup {
-            capabilities = capabilities,
-            on_attach = function(client)
-              -- disable lsp highlighting, since we use treesitter
-              client.server_capabilities.semanticTokensProvider = nil
-            end
-        }
-    end,
-    -- overrides for some servers
-    ["omnisharp"] = function ()
-      require("lspconfig").omnisharp.setup {
-        cmd = {
-          "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()),
-          "FormattingOptions:EnableEditorConfigSupport=true",
-          "RoslynExtensionsOptions:enableDecompilationSupport=true"
-        },
-        handlers = {
-          ["textDocument/definition"] = require('omnisharp_extended').handler,
-        }
-      }
-    end,
-    ["yamlls"] = function ()
-      require("lspconfig").yamlls.setup {
-        settings = {
-          yaml = {
-            schemas = require('schemastore').json.schemas(),
-          },
-        }
-      }
-    end,
-    ["jsonls"] = function ()
-      require("lspconfig").jsonls.setup {
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas(),
-          },
-        }
-      }
-    end,
-    ["lua_ls"] = function  ()
-      require("lspconfig").lua_ls.setup {
-        on_init = function(client)
-          if client.workspace_folders then
-            local path = client.workspace_folders[1].name
-            if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
-              return
-            end
-          end
-
-          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-            runtime = {
-              -- Tell the language server which version of Lua you're using
-              -- (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT'
-            },
-            -- Make the server aware of Neovim runtime files
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                vim.env.VIMRUNTIME
-              }
-            }
-          })
-        end,
-        settings = { Lua = {} }
-    }
-    end,
-    ["tailwindcss"] = function ()
-      require("lspconfig").tailwindcss.setup {
-        root_dir = require("lspconfig.util").root_pattern(".git"),
-      }
-    end
 }

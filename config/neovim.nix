@@ -61,8 +61,7 @@ in
       omnisharp-extended-lsp-nvim
       SchemaStore-nvim
       nvim-lspconfig
-      mason-nvim
-      mason-lspconfig-nvim
+      lazy-lsp-nvim
       blink-cmp
       blink-copilot
       blink-cmp-git
