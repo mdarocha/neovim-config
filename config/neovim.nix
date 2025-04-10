@@ -55,6 +55,8 @@ in
       nvim-tree-lua
       lualine-nvim
       which-key-nvim
+      codecompanion-nvim
+      render-markdown-nvim
       project-nvim
       telescope-fzf-native-nvim
       telescope-nvim
