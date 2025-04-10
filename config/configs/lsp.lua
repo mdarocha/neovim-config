@@ -53,7 +53,11 @@ require("lazy-lsp").setup {
     capabilities = require('blink.cmp').get_lsp_capabilities(),
     on_attach = function(client)
       -- disable lsp highlighting, since we use treesitter
-      client.server_capabilities.semanticTokensProvider = nil
+    end,
+    on_init = function(client)
+      if client.server_capabilities then
+        client.server_capabilities.semanticTokensProvider = nil
+      end
     end
   },
   -- https://github.com/dundalek/lazy-lsp.nvim/blob/master/servers.md#curated-servers
