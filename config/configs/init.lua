@@ -66,10 +66,18 @@ vim.opt.colorcolumn = "80,120"
 vim.opt.signcolumn = "yes"
 
 -- Moving around splits
-vim.keymap.set("n", "gh", "<C-w>h", { remap = false, silent = true })
-vim.keymap.set("n", "gj", "<C-w>j", { remap = false, silent = true })
-vim.keymap.set("n", "gk", "<C-w>k", { remap = false, silent = true })
-vim.keymap.set("n", "gl", "<C-w>l", { remap = false, silent = true })
+vim.keymap.set("n", "gh", "<C-w>h", {
+  remap = false, silent = true, desc = "Move to left split"
+})
+vim.keymap.set("n", "gj", "<C-w>j", {
+  remap = false, silent = true, desc = "Move to bottom split"
+})
+vim.keymap.set("n", "gk", "<C-w>k", {
+  remap = false, silent = true, desc = "Move to top split"
+})
+vim.keymap.set("n", "gl", "<C-w>l", {
+  remap = false, silent = true, desc = "Move to right split"
+})
 
 -- Leader map
 vim.g.mapleader = "\\"

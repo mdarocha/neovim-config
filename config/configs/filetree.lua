@@ -15,7 +15,7 @@ require("nvim-tree").setup({
   }
 })
 
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { remap = false, silent = true })
+vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { remap = false, silent = true, desc = 'NvimTree' })
 
 -- autoclose
 local function tab_win_closed(winnr)

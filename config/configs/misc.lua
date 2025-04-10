@@ -41,3 +41,9 @@ require'nvim-treesitter.configs'.setup {
 -- also enable treesitter-based folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- which-key.nvim
+require("which-key").setup {
+  preset = "helix",
+  delay = 300
+}

@@ -20,6 +20,15 @@ project_files = function()
   end
 end
 
-vim.keymap.set('n', '<Leader>g', '<cmd>Telescope live_grep<CR>', { remap = false, silent = true })
-vim.keymap.set('n', '<Leader>f', function() project_files() end, { remap = false, silent = true })
-vim.keymap.set('n', '<Leader>o', '<cmd>Telescope projects projects<CR>', { remap = false, silent = true })
+vim.keymap.set('n', '<Leader>g', '<cmd>Telescope live_grep<CR>', {
+  remap = false, silent = true,
+  desc = 'Telescope: Live Grep'
+})
+vim.keymap.set('n', '<Leader>f', function() project_files() end, {
+  remap = false, silent = true,
+  desc = 'Telescope: Find Files'
+})
+vim.keymap.set('n', '<Leader>o', '<cmd>Telescope projects projects<CR>', {
+  remap = false, silent = true,
+  desc = 'Telescope: Projects'
+})

@@ -1,26 +1,54 @@
 -- keymaps
 
+-- remove default neovim lsp keymaps
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "grn")
+vim.keymap.del("n", "gra")
+
 -- functions to set lsp keymaps as buffer-local mappings
 local function set_lsp_keymaps(buf)
   local opts = { remap = false, silent = true, buffer = buf }
 
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts)
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<A-Enter>", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, opts)
 
   vim.keymap.set("n", "<C-]>", function()
     require("telescope.builtin").lsp_implementations { layout_strategy = "vertical" }
   end, opts)
 
+
+  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {
+    remap = false,
+    silent = true,
+    buffer = buf,
+    desc = "LSP: Rename",
+  })
+  vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, {
+    remap = false,
+    silent = true,
+    buffer = buf,
+    desc = "LSP: Document Symbol",
+  })
+
   vim.keymap.set("n", "gr", function()
     require("telescope.builtin").lsp_references { layout_strategy = "vertical" }
-  end, opts)
+  end, {
+    remap = false,
+    silent = true,
+    buffer = buf,
+    desc = "LSP: References",
+  })
 
   vim.keymap.set("n", "gd", function()
     require("omnisharp_extended").telescope_lsp_definitions()
-  end, opts)
+  end, {
+    remap = false,
+    silent = true,
+    buffer = buf,
+    desc = "LSP: Definitions",
+  })
 end
 
 -- set keymaps when opening a file that's not a help file

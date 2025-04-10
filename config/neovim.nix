@@ -54,6 +54,7 @@ in
       copilot-lua
       nvim-tree-lua
       lualine-nvim
+      which-key-nvim
       project-nvim
       telescope-fzf-native-nvim
       telescope-nvim
