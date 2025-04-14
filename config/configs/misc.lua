@@ -48,6 +48,16 @@ require("which-key").setup {
   delay = 300
 }
 
+-- mini.diff
+require("mini.diff").setup {
+}
+
+-- render-markdown.nvim, for codecompanion chat views
+require('render-markdown').setup {
+  file_types = { "codecompanion" },
+  anti_conceal = { enabled = false }
+}
+
 -- codecompanion.nvim
 require("codecompanion").setup {
   adapters = {
@@ -100,6 +110,9 @@ require("codecompanion").setup {
     },
     chat = {
       show_settings = false,
+    },
+    diff = {
+      provider = "mini_diff"
     }
   }
 }
@@ -111,9 +124,3 @@ vim.keymap.set({ "n", "v" }, "<leader>C", "<cmd>CodeCompanionActions<cr>", {
 vim.keymap.set({ "n", "v" }, "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", {
   remap = false, silent = true, desc = "Code Companion: Chat"
 })
-
--- render-markdown.nvim, for codecompanion chat views
-require('render-markdown').setup {
-  file_types = { "codecompanion" },
-  anti_conceal = { enabled = false }
-}
