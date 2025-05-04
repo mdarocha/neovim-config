@@ -47,3 +47,30 @@ require("which-key").setup {
   preset = "helix",
   delay = 300
 }
+
+-- avante
+require("avante_lib").load()
+require("avante").setup {
+  provider = "copilot",
+  behaviour = {
+    auto_suggestions = false,
+    enable_token_counting = false
+  },
+  windows = {
+    width = 40,
+    sidebar_header = {
+      enable = false
+    },
+    input = {
+      height = 4
+    }
+  }
+}
+
+-- disable number line for certain filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
+  callback = function()
+    vim.opt_local.number = false
+  end
+})

@@ -8,7 +8,7 @@ require('lualine').setup {
     component_separators = "",
     globalstatus = true,
     icons_enabled = true,
-    disabled_filetypes = { "NvimTree", "TelescopePrompt" },
+    disabled_filetypes = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
     always_show_tabline = false
   },
   sections = {

@@ -66,6 +66,8 @@ in
       blink-cmp
       blink-copilot
       blink-cmp-git
+      blink-cmp-avante
+      avante-nvim
     ];
 
     extraPackages = [

@@ -7,7 +7,7 @@ require("blink.cmp").setup {
     }
   },
   sources = {
-    default = { 'lsp', 'path', 'copilot', 'git', 'snippets', 'buffer' },
+    default = { 'avante', 'lsp', 'path', 'copilot', 'git', 'snippets', 'buffer' },
     providers = {
       copilot = {
         name = "copilot",
@@ -18,7 +18,11 @@ require("blink.cmp").setup {
       git = {
         name = "git",
         module = "blink-cmp-git"
-      }
+      },
+      avante = {
+        name = "avante",
+        module = "blink-cmp-avante"
+      },
     }
   }
 }
