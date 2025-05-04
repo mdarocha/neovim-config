@@ -11,9 +11,9 @@ let
 
   inherit (pkgs.vimUtils) buildVimPlugin;
 
-  numbers-vim = buildVimPlugin {
-    name = "numbers.vim";
-    src = vimPluginSrcs.numbers-vim;
+  numbers-nvim = buildVimPlugin {
+    name = "numbers.nvim";
+    src = vimPluginSrcs.numbers-nvim;
   };
   vim-renamer = buildVimPlugin {
     name = "renamer.vim";
@@ -44,7 +44,7 @@ in
     plugins = with pkgs.vimPlugins; [
       nvim-web-devicons
       vim-sensible
-      numbers-vim
+      numbers-nvim
       vim-renamer
       vim-fugitive
       direnv-vim

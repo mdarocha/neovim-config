@@ -10,8 +10,8 @@
     };
 
     # vim plugins
-    numbers-vim = {
-      url = "github:myusuf3/numbers.vim/master";
+    numbers-nvim = {
+      url = "github:nkakouros-original/numbers.nvim/master";
       flake = false;
     };
 
@@ -76,10 +76,8 @@
       homeManagerModules = {
         default = import ./config {
           inherit (inputs)
-            numbers-vim
+            numbers-nvim
             vim-renamer
-            vim-password-store
-            vim-gtfo
             neosolarized-nvim
             ;
         };

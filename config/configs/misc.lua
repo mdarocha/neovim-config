@@ -74,3 +74,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.number = false
   end
 })
+
+require('numbers').setup {
+  exclude_filetypes = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
+}
