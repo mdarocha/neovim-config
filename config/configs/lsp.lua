@@ -99,6 +99,7 @@ require("lazy-lsp").setup {
     "scry",                            -- archived on Jun 1, 2023
     "biome",                           -- not mature enough to be default
     "oxlint",                          -- prefer eslint
+    "tailwindcss"
   },
   preferred_servers = {
     markdown = {},
@@ -139,10 +140,6 @@ require("lazy-lsp").setup {
           }
         }
       }
-    },
-    tailwindcss = {
-      root_dir = require("lspconfig.util").root_pattern(".git"),
-      autostart = false
     }
   }
 }

@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- treesitter
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true
   },
@@ -47,80 +47,3 @@ require("which-key").setup {
   preset = "helix",
   delay = 300
 }
-
--- mini.diff
-require("mini.diff").setup {
-}
-
--- render-markdown.nvim, for codecompanion chat views
-require('render-markdown').setup {
-  file_types = { "codecompanion" },
-  anti_conceal = { enabled = false }
-}
-
--- codecompanion.nvim
-require("codecompanion").setup {
-  adapters = {
-    copilot = function ()
-      return require("codecompanion.adapters").extend("copilot", {
-        schema = {
-          model = {
-            default = "claude-3.7-sonnet",
-          }
-        }
-      })
-    end
-  },
-  strategies = {
-    chat = {
-      slash_commands = {
-        ["file"] = {
-          -- Location to the slash command in CodeCompanion
-          callback = "strategies.chat.slash_commands.file",
-          description = "Select a file using Telescope",
-          opts = {
-            provider = "telescope", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks"
-            contains_code = true,
-          },
-        },
-        ["help"] = {
-          -- Location to the slash command in CodeCompanion
-          callback = "strategies.chat.slash_commands.help",
-          description = "Search help tags using Telescope",
-          opts = {
-            provider = "telescope", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks"
-            contains_code = true,
-          },
-        },
-        ["buffer"] = {
-          -- Location to the slash command in CodeCompanion
-          callback = "strategies.chat.slash_commands.buffer",
-          description = "Select a buffer using Telescope",
-          opts = {
-            provider = "telescope", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks"
-            contains_code = true,
-          },
-        },
-      },
-    },
-  },
-  display = {
-    action_palette = {
-      provider = "telescope",
-    },
-    chat = {
-      show_settings = false,
-    },
-    diff = {
-      provider = "mini_diff"
-    }
-  }
-}
-
-vim.keymap.set({ "n", "v" }, "<leader>C", "<cmd>CodeCompanionActions<cr>", {
-  remap = false, silent = true, desc = "Code Companion: Actions"
-})
-
-vim.keymap.set({ "n", "v" }, "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", {
-  remap = false, silent = true, desc = "Code Companion: Chat"
-})
