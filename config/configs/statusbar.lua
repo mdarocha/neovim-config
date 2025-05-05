@@ -18,7 +18,12 @@ require('lualine').setup {
       { 'diff', colored = true }
     },
     lualine_c = {
-      'filename'
+      {
+        'filename',
+        cond = function()
+          return vim.bo.filetype ~= 'codecompanion'
+        end
+      }
     },
     lualine_x = { 'filetype' },
     lualine_y = { 'progress' },
@@ -37,3 +42,4 @@ require('lualine').setup {
     }
   }
 }
+

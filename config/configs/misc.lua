@@ -50,12 +50,12 @@ require("which-key").setup {
 
 -- disable number line for certain filetypes
 vim.api.nvim_create_autocmd({"FileType", "BufEnter", "WinEnter"}, {
-  pattern = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
+  pattern = { "NvimTree", "TelescopePrompt", "codecompanion" },
   callback = function()
     vim.opt_local.number = false
   end
 })
 
 require('numbers').setup {
-  excluded_filetypes = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
+  excluded_filetypes = { "NvimTree", "TelescopePrompt", "codecompanion" },
 }
