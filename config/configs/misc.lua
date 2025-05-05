@@ -48,27 +48,8 @@ require("which-key").setup {
   delay = 300
 }
 
--- avante
-require("avante_lib").load()
-require("avante").setup {
-  provider = "copilot",
-  behaviour = {
-    auto_suggestions = false,
-    enable_token_counting = false
-  },
-  windows = {
-    width = 40,
-    sidebar_header = {
-      enable = false
-    },
-    input = {
-      height = 4
-    }
-  }
-}
-
 -- disable number line for certain filetypes
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd({"FileType", "BufEnter", "WinEnter"}, {
   pattern = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
   callback = function()
     vim.opt_local.number = false
@@ -76,5 +57,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 require('numbers').setup {
-  exclude_filetypes = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
+  excluded_filetypes = { "NvimTree", "TelescopePrompt", "Avante", "AvanteInput", "AvanteSelectedFiles" },
 }
