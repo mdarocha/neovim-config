@@ -1,9 +1,9 @@
 -- flatten.nvim
-require('flatten').setup({
+require('flatten').setup {
   window = {
     open = 'vsplit'
   }
-})
+}
 
 -- colorscheme
 require('NeoSolarized').setup {
@@ -13,7 +13,24 @@ require('NeoSolarized').setup {
   styles = {
     string = { italic = false },
     keywords = { italic = false },
-  }
+  },
+    on_highlights = function(highlights, colors)
+      -- WhichKey icons
+      highlights.WhichKeyIcon = { fg = colors.blue }
+      highlights.WhichKeyIconAzure = { fg = colors.blue }
+      highlights.WhichKeyIconBlue = { fg = colors.blue }
+      highlights.WhichKeyIconCyan = { fg = colors.cyan }
+      highlights.WhichKeyIconGreen = { fg = colors.green }
+      highlights.WhichKeyIconGrey = { fg = colors.gray }
+      highlights.WhichKeyIconOrange = { fg = colors.orange }
+      highlights.WhichKeyIconPurple = { fg = colors.magenta }
+      highlights.WhichKeyIconRed = { fg = colors.red }
+      highlights.WhichKeyIconYellow = { fg = colors.yellow }
+
+      -- fixup floating windows
+      -- match title color to background
+      highlights.FloatTitle = { fg = colors.base1, bg = colors.bg1 }
+    end,
 }
 
 vim.opt.termguicolors = true
@@ -48,14 +65,28 @@ require("which-key").setup {
   delay = 300
 }
 
+local no_numbers_ft = { "NvimTree", "TelescopePrompt", "codecompanion" }
+
+require('numbers').setup {
+  excluded_filetypes = no_numbers_ft
+}
+
 -- disable number line for certain filetypes
 vim.api.nvim_create_autocmd({"FileType", "BufEnter", "WinEnter"}, {
-  pattern = { "NvimTree", "TelescopePrompt", "codecompanion" },
+  pattern = no_numbers_ft,
   callback = function()
     vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
   end
 })
 
-require('numbers').setup {
-  excluded_filetypes = { "NvimTree", "TelescopePrompt", "codecompanion" },
-}
+-- disable number line for floating windows
+vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
+  callback = function()
+    local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
+    if is_floating then
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
+    end
+  end
+})

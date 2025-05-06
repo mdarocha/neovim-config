@@ -3,8 +3,13 @@ require("blink.cmp").setup {
   signature = {
     enabled = true,
     window = {
-      show_documentation = false
+      show_documentation = false,
+      border = 'rounded',
     }
+  },
+  completion = {
+    menu = { border = 'none' },
+    documentation = { window = { border = 'rounded' } },
   },
   sources = {
     default = { 'lsp', 'path', 'copilot', 'git', 'snippets', 'buffer' },

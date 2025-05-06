@@ -49,7 +49,13 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Spellcheck when writing natural text
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {"tex", "mail", "gitcommit", "markdown"},
-  command = "setlocal spell spelllang=pl,en_us"
+  callback = function()
+    local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
+    if is_floating == false then
+      vim.opt_local.spell = true
+      vim.opt_local.spelllang= "pl,en_us"
+    end
+  end
 })
 
 -- Misc visual stuff
@@ -63,7 +69,7 @@ vim.opt.hlsearch = true
 vim.opt.mouse = "a"
 vim.opt.mousemodel = "extend"
 vim.opt.colorcolumn = "80,120"
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
 
 -- Moving around splits
 vim.keymap.set("n", "gh", "<C-w>h", {

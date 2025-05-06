@@ -1,23 +1,44 @@
--- keymaps
+-- diagnostic config
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '󰳦',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    }
+  }
+})
 
+-- keymaps
 -- remove default neovim lsp keymaps
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gra")
+vim.keymap.del("n", "<C-w>d")
 
 -- functions to set lsp keymaps as buffer-local mappings
 local function set_lsp_keymaps(buf)
   local opts = { remap = false, silent = true, buffer = buf }
 
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "K", function()
+    vim.lsp.buf.hover { border = "rounded" }
+  end, opts)
+
+  vim.keymap.set("n", "<A-k>", function()
+    vim.diagnostic.open_float { border = "rounded" }
+  end, opts)
+
+  vim.keymap.set({ "n", "i" }, "<C-k>", function()
+    vim.lsp.buf.signature_help { border = "rounded" }
+  end, opts)
+
   vim.keymap.set("n", "<A-Enter>", vim.lsp.buf.code_action, opts)
 
   vim.keymap.set("n", "<C-]>", function()
     require("telescope.builtin").lsp_implementations { layout_strategy = "vertical" }
   end, opts)
-
 
   vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {
     remap = false,
@@ -25,6 +46,7 @@ local function set_lsp_keymaps(buf)
     buffer = buf,
     desc = "LSP: Rename",
   })
+
   vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, {
     remap = false,
     silent = true,

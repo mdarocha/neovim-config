@@ -89,7 +89,7 @@ update_spinner = function() -- Assign to the forward-declared variable
 
   vim.api.nvim_buf_set_extmark(buf, spinner_info.namespace_id, last_line, 0, {
     virt_lines = { { { spinner_info.spinner_symbols[spinner_info.spinner_index] .. " Processing...", "Comment" } } },
-    virt_lines_above = true, -- false means below the line
+    virt_lines_above = false, -- false means below the line
   })
 end
 
