@@ -19,31 +19,25 @@ vim.opt.smarttab = true
 
 -- Use tab characters for makefiles and go
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "make",
-  command = "setlocal noexpandtab"
+  pattern = { "go", "make" },
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.listchars:append("tab:  ")
+  end
 })
 
--- Go fixes
+-- Format Nix, Lua with 2 spaces
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  command = "setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4"
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  command = "setlocal listchars+=tab:\\ \\"
-})
-
--- Nix formatting
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "nix",
-  command = "setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2"
-})
-
--- Lua formatting
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  command = "setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2"
+  pattern = { "nix", "lua" },
+  callback = function()
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+  end
 })
 
 -- Spellcheck when writing natural text
@@ -96,6 +90,11 @@ vim.opt.foldlevelstart = 99
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { remap = false, silent = true })
 vim.opt.shell = "zsh"
 
+-- Open a new terminal in a split
+vim.keymap.set("n", "<leader>t", function()
+  vim.cmd("vsplit | terminal")
+end, { remap = false, silent = true, desc = "Open terminal" })
+
 -- Persist undo
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("cache") .. "/vimundo"
@@ -106,18 +105,24 @@ vim.opt.clipboard = "unnamedplus"
 -- C# and F# filetype fixes
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   pattern = {"*.fsproj", "*.props", "*.csproj", "*.targets"},
-  command = "set filetype=xml"
+  callback = function()
+    vim.opt_local.filetype = "xml"
+  end
 })
 
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   pattern = "*.fs",
-  command = "set filetype=fsharp"
+  callback = function()
+    vim.opt_local.filetype = "fsharp"
+  end
 })
 
--- fix htmldjango files to properly work with lsp
+-- fix html template files to properly work with lsp
 vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = "htmldjango",
-  command = "set ft=html"
+  pattern = { "htmldjango", "htmlangular" },
+  callback = function()
+    vim.opt_local.filetype = "html"
+  end
 })
 
 -- neovide setup

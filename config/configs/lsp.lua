@@ -126,7 +126,7 @@ require("lazy-lsp").setup {
   preferred_servers = {
     markdown = {},
     python = { "pylsp", "ruff" },
-    nix = { "nil_ls" },
+    nix = { "nil_ls" }
   },
   -- overrides for some servers
   configs = {
