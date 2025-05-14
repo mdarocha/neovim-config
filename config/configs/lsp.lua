@@ -64,7 +64,7 @@ local function set_lsp_keymaps(buf)
   })
 
   vim.keymap.set("n", "gd", function()
-    require("omnisharp_extended").telescope_lsp_definitions()
+    require("telescope.builtin").lsp_definitions { layout_strategy = "vertical" }
   end, {
     remap = false,
     silent = true,
@@ -90,9 +90,10 @@ require("copilot").setup({
   suggestion = { enabled = false },
   panel = { enabled = false, },
   filetypes = {
-    pass = false,
     markdown = true,
-    lua = true
+    lua = true,
+    yaml = true,
+    gitcommit = true
   },
 })
 
@@ -137,7 +138,10 @@ require("lazy-lsp").setup {
         "RoslynExtensionsOptions:enableDecompilationSupport=true"
       },
       handlers = {
-        ["textDocument/definition"] = require('omnisharp_extended').handler,
+        ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+        ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+        ["textDocument/references"] = require('omnisharp_extended').references_handler,
+        ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
       }
     },
     yamlls = {

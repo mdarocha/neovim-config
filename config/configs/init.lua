@@ -118,7 +118,7 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 })
 
 -- fix html template files to properly work with lsp
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "htmldjango", "htmlangular" },
   callback = function()
     vim.opt_local.filetype = "html"

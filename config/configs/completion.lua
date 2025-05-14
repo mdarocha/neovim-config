@@ -13,6 +13,9 @@ require("blink.cmp").setup {
   },
   sources = {
     default = { 'lsp', 'path', 'copilot', 'git', 'snippets', 'buffer' },
+    per_filetype = {
+      codecompanion = { 'codecompanion' },
+    },
     providers = {
       copilot = {
         name = "copilot",
@@ -23,12 +26,7 @@ require("blink.cmp").setup {
       git = {
         name = "git",
         module = "blink-cmp-git"
-      },
-      -- TODO throws error when used
-      --avante = {
-      --  name = "avante",
-      --  module = "blink-cmp-avante"
-      --},
+      }
     }
   }
 }
