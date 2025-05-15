@@ -102,9 +102,7 @@ require("lazy-lsp").setup {
   prefer_local = false,
   default_config = {
     capabilities = require('blink.cmp').get_lsp_capabilities(),
-    on_attach = function(client)
-      -- disable lsp highlighting, since we use treesitter
-    end,
+    -- disable lsp highlighting, since we use treesitter
     on_init = function(client)
       if client.server_capabilities then
         client.server_capabilities.semanticTokensProvider = nil

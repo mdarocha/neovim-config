@@ -24,6 +24,11 @@ let
     name = "NeoSolarized-nvim";
     src = vimPluginSrcs.neosolarized-nvim;
   };
+
+  custom-treesitter-queries = buildVimPlugin {
+    name = "custom-treesitter-queries";
+    src = ./plugins/custom-treesitter-queries;
+  };
 in
 {
   programs.neovim = lib.mkIf cfg.enable {
@@ -36,10 +41,12 @@ in
 
     withNodeJs = true; # required by copilot
 
-    extraLuaConfig = let 
-      files = builtins.attrNames (builtins.readDir ./configs);
-      fileContents = builtins.map (file: builtins.readFile "${./configs}/${file}") files;
-    in builtins.concatStringsSep "\n" fileContents;
+    extraLuaConfig =
+      let
+        files = builtins.attrNames (builtins.readDir ./configs);
+        fileContents = builtins.map (file: builtins.readFile "${./configs}/${file}") files;
+      in
+      builtins.concatStringsSep "\n" fileContents;
 
     plugins = with pkgs.vimPlugins; [
       nvim-web-devicons
@@ -67,6 +74,7 @@ in
       blink-copilot
       blink-cmp-git
       codecompanion-nvim
+      custom-treesitter-queries
     ];
 
     extraPackages = [
