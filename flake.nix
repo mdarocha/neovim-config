@@ -15,6 +15,11 @@
       flake = false;
     };
 
+    telescope-ghq-nvim = {
+      url = "github:/nvim-telescope/telescope-ghq.nvim/master";
+      flake = false;
+    };
+
     vim-renamer = {
       url = "github:qpkorr/vim-renamer/master";
       flake = false;
@@ -79,6 +84,7 @@
             numbers-nvim
             vim-renamer
             neosolarized-nvim
+            telescope-ghq-nvim
             ;
         };
       };

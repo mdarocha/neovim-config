@@ -19,10 +19,13 @@ let
     name = "renamer.vim";
     src = vimPluginSrcs.vim-renamer;
   };
-
   NeoSolarized-nvim = buildVimPlugin {
     name = "NeoSolarized-nvim";
     src = vimPluginSrcs.neosolarized-nvim;
+  };
+  telescope-ghq-nvim = buildVimPlugin {
+    name = "telescope-ghq-nvim";
+    src = vimPluginSrcs.telescope-ghq-nvim;
   };
 
   custom-treesitter-queries = buildVimPlugin {
@@ -62,7 +65,7 @@ in
       nvim-tree-lua
       lualine-nvim
       which-key-nvim
-      project-nvim
+      telescope-ghq-nvim
       telescope-fzf-native-nvim
       telescope-nvim
       nvim-treesitter.withAllGrammars
@@ -80,6 +83,7 @@ in
     extraPackages = [
       # Required by telescope
       pkgs.ripgrep
+      pkgs.ghq
       # Used by mason to install some lsps
       pkgs.gcc
       pkgs.cargo

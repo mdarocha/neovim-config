@@ -76,7 +76,25 @@
         "neosolarized-nvim": "neosolarized-nvim",
         "nixpkgs": "nixpkgs",
         "numbers-nvim": "numbers-nvim",
+        "telescope-ghq-nvim": "telescope-ghq-nvim",
         "vim-renamer": "vim-renamer"
+      }
+    },
+    "telescope-ghq-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692315070,
+        "narHash": "sha256-bOpgGxaSUN/+3DCm2+8G57y+miPmeMIuDQaO4Ugikf4=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-ghq.nvim",
+        "rev": "2bd2e2d10f1a06fce9cce1e33ffe464c84ceb63b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "ref": "master",
+        "repo": "telescope-ghq.nvim",
+        "type": "github"
       }
     },
     "vim-renamer": {

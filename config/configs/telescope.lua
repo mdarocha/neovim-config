@@ -1,10 +1,8 @@
-require('project_nvim').setup()
-
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('projects')
+require("telescope").load_extension('ghq')
 
 local is_inside_work_tree = {}
-project_files = function()
+local project_files = function()
   local opts = {}
 
   local cwd = vim.fn.getcwd()
@@ -28,7 +26,7 @@ vim.keymap.set('n', '<Leader>f', function() project_files() end, {
   remap = false, silent = true,
   desc = 'Telescope: Find Files'
 })
-vim.keymap.set('n', '<Leader>o', '<cmd>Telescope projects projects<CR>', {
+vim.keymap.set('n', '<Leader>o', '<cmd>Telescope ghq<CR>', {
   remap = false, silent = true,
   desc = 'Telescope: Projects'
 })
